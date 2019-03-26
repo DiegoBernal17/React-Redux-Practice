@@ -13,6 +13,7 @@ class Home extends Component {
     modalVisible: false,
   }
   handleOpenModal = (media) => {
+    console.log(media)
     this.setState({
       modalVisible: true,
       media
@@ -54,9 +55,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state, props) => {
+  const categories = state.data.categories.map((categoryId) => {
+    return state.data.entities.categories[categoryId]
+  })
+
   return {
-    categories: state.data.categories,
-    search: state.search
+    categories,
+    search: state.data.search
   }
 }
 

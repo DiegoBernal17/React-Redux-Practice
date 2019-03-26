@@ -1,6 +1,13 @@
-import { bindActionCreators } from "redux";
 
-const data = (state ,action) => {
+import schema from '../schemas/index'
+
+const initialState = {
+  entities: schema.entities,
+  categories: schema.result.categories,
+  search: []
+}
+
+const data = (state = initialState, action) => {
   switch(action.type) {
     case 'SEARCH_VIDEO': {
       if(!action.payload.query) {
@@ -14,7 +21,10 @@ const data = (state ,action) => {
       })
       return {
         ...state,
-        search: results
+        data: {
+          ...state,
+          search: results
+        }
       }
     }
     default:
