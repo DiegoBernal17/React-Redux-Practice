@@ -9,14 +9,18 @@ function Categories(props) {
     <div className="Categories">
       <Search />
       {
-        props.search.length > 0 && <Category description="Resultados de la" title="Búsqueda" playlist={props.search} />
+        props.search.map((item) => {
+          return <Media openModal={props.handleOpenModal} {...item.toJS()} key={item.get('id')}/>
+        })
       }
       {
         props.categories.map((item) =>{
           return (
             <Category
-              key={item.id}
-              {...item}
+              key={item.get('id')}
+              description={item.get('description')}
+              title={item.get('title')}
+              playlist={item.get('playlist')}
               handleOpenModal={props.handleOpenModal}
             />
           )
